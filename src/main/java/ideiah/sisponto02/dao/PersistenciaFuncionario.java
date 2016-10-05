@@ -3,7 +3,6 @@ package ideiah.sisponto02.dao;
 import ideiah.sisponto02.modelo.Funcionario;
 import java.util.Date;
 import java.util.List;
-import javafx.scene.chart.PieChart.Data;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
