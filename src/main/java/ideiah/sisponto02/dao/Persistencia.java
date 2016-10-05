@@ -25,7 +25,7 @@ public abstract class Persistencia {
      */
     public boolean salvar(Object obj) {
 
-        Session session = ConexaoTesteHibernate.getInstance();
+        Session session = ConexaoHibernate.getInstance();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
@@ -50,7 +50,7 @@ public abstract class Persistencia {
      */
     public Object consultar(String coluna, String valor, Class classe) {
 
-        Session session = ConexaoTesteHibernate.getInstance();
+        Session session = ConexaoHibernate.getInstance();
         Transaction tx = null;
         try {
             if (classe != null) {
@@ -79,7 +79,7 @@ public abstract class Persistencia {
      */
     public boolean alterar(Object obj) {
 
-        Session session = ConexaoTesteHibernate.getInstance();
+        Session session = ConexaoHibernate.getInstance();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
@@ -103,7 +103,7 @@ public abstract class Persistencia {
      */
     public boolean excluir(Object obj) {
 
-        Session session = ConexaoTesteHibernate.getInstance();
+        Session session = ConexaoHibernate.getInstance();
         Transaction tx = null;
 
         try {
@@ -127,7 +127,7 @@ public abstract class Persistencia {
      */
      public List<?> buscaLista(Class<?> classe) {
 
-        Session session = ConexaoTesteHibernate.getInstance();
+        Session session = ConexaoHibernate.getInstance();
         Transaction tx = null;
         try{
         tx = session.beginTransaction();
