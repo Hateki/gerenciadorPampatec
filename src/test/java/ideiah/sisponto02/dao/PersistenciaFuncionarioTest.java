@@ -24,6 +24,7 @@ import org.junit.Ignore;
  * @author Jonas Chagas
  */
 
+@Ignore
 public class PersistenciaFuncionarioTest {
 
     PersistenciaFuncionario persistefuncionario;
