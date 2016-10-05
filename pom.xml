@@ -5,7 +5,6 @@
     <groupId>com.ideiah</groupId>
     <artifactId>GerenciadorPampatec</artifactId>
     <version>1.0</version>
-    <packaging>war</packaging>
 
     <name>GerenciadorPampatec</name>
 
