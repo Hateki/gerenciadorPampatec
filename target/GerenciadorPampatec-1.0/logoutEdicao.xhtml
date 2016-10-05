@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <f:facet name="last">
+            <h:outputStylesheet library="css" name="bootstrap.css"  />
+            <h:outputStylesheet library="css" name="projeto.css"  />            
+            <h:outputStylesheet library="css" name="font-awesome.min.css"/>
+        </f:facet>
+
+        <h:outputScript library="js" name="jquery-2.2.2.min.js" />     
+        <h:outputScript library="js" name="bootstrap-3.3.6.min.js"/>            
+        <h:outputScript library="js" name="bootstrap.js" />        
+        
+        <title>Logout</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        
+        <main>
+            <br/>
+        <div class="paginaErro well">
+            
+            
+            <h2>
+                <p>Edição finalizada com sucesso!</p>
+            </h2>
+            <p>A edição da sua conta foi realizada com sucesso. Para poder acessar o sistema do Pampatec 
+                novamente você deverá confirmar o seu e-mail. Para isso, enviamos um e-mail com as devidas 
+                instruções para seu endereço de e-mail.</p>
+            
+            <h:form>
+                <div>
+                    <br/><br/>
+                    <p:button id="botaoLogin"
+                            class="botaoBase botaoVerde"
+                            title="Redireciona para a página de login."
+                            value="Acesse sua conta"
+                            outcome="loginEmpreendedor.jsf"
+                            icon="fa fa-sign-out"
+                            >
+                           
+                        </p:button>
+                </div>
+            </h:form>
+        </div>
+    </main>
+        
+        <!-- Início do footer profissional em HTML5+CCS3  -->
+        <footer class="rodapePaginaErro">
+            <nav>
+                <hr></hr>
+                <p>
+                    <small>Copyright © 2015-2016 </small> - <strong> Ideiah Soluções em Software</strong>
+                </p>
+                <hr></hr>
+            </nav>
+        </footer>
+        <!-- Fim do footer profissional em HTML5+CCS3  -->
+    </h:body>
+</html>

@@ -1,0 +1,109 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 27/06/2016, 16:08:25
+    Author     : Maicon Alves
+*/
+
+
+.ui-datatable-header{
+    background-color: #00A859;
+    background-image: none;
+    color: #FFFFFF;
+    text-shadow: none;
+}
+.ui-datatable-footer{
+    background-color: #00A859;
+}
+.ui-paginator{
+    background-color: #00A859;
+    background-image: none;
+}
+.ui-datatable {
+    font: normal 14px/150% Arial, Helvetica, sans-serif;
+          background: #fff;
+          overflow: hidden;
+          border: 1px solid #00A859;
+          -webkit-border-radius: 3px;
+          -moz-border-radius: 3px;
+          border-radius: 3px; 
+}
+.ui-datatable td, .ui-datatable th { 
+    padding: 3px 10px; 
+}
+.ui-datatable thead th {
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #00A859), color-stop(1, #00A859) );
+    background:-moz-linear-gradient( center top, #00A859 5%, #00A859 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#00A859', endColorstr='#00A859');
+    background-color:#00A859; 
+    color:#FFFFFF; 
+    text-shadow: none;
+    font-size: 15px; 
+    font-weight:normal;
+} 
+.ui-datatable tbody td {
+    color: #000000;
+    border-left: 1px solid #C6FFC2;
+    font-size: 14px;
+    font-weight: normal;
+}
+.ui-datatable tbody .alt td {
+    background: #DCF4E1;
+    color: #2B5E25;
+}
+.ui-datatable tbody td:first-child {
+    border-left: none;
+}
+.ui-datatable tbody tr:last-child td {
+    border-bottom: none;
+}
+.ui-datatable tfoot td div {
+    border-top: 1px solid #00A859;
+    background: #00A859;
+}
+.ui-datatable tfoot td {
+    padding: 0;
+    font-size: 12px
+}
+.ui-datatable tfoot td div{
+    padding: 2px;
+}
+.ui-datatable tfoot td ul {
+    margin: 0; 
+    padding:0;
+    list-style: none;
+    text-align: right;
+}
+.ui-datatable tfoot  li {
+    display: inline;
+}
+.ui-datatable tfoot li a {
+    text-decoration: none;
+    display: inline-block; 
+    padding: 2px 8px; 
+    margin: 1px;
+    color: #FFFFFF;
+    border: 1px solid #00A859;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #00A859), color-stop(1, #275420) );
+    background:-moz-linear-gradient( center top, #00A859 5%, #275420 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#00A859', endColorstr='#275420');
+    background-color:#00A859; 
+}
+.ui-datatable tfoot ul.active, .ui-datatable tfoot ul a:hover {
+    text-decoration: none;
+    border-color: #275420; 
+    color: #FFFFFF;
+    background: none;
+    background-color:#36752D;
+}
+.ui-state-default{
+    box-shadow: none;
+}
+
+

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.ideiah.gerenciadorpampatec.model.Textocomentario" table="textocomentario" catalog="gerenciadorpampatec" optimistic-lock="version">
+        <id name="idtextocomentario" type="int">
+            <column name="idtextocomentario" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="gerenteRelacionamento" class="com.ideiah.gerenciadorpampatec.model.GerenteRelacionamento" fetch="select">
+            <column name="gerente_relacionamento_idgerente_relacionamento"/>
+        </many-to-one>
+        <property name="texto" type="string">
+            <column name="texto" length="65535" />
+        </property>
+        <property name="dataAlteracao" type="timestamp">
+            <column name="dataAlteracao" length="19" />
+        </property>
+        <property name="dataSubmissao" type="timestamp">
+            <column name="dataSubmissao" length="19" />
+        </property>
+        <property name="tipo" type="java.lang.Integer">
+            <column name="tipo" />
+        </property>
+        <set name="comentarioprojetos" table="comentarioprojeto_has_textocomentario" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="textocomentario_idtextocomentario" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.ideiah.gerenciadorpampatec.model.ComentarioProjeto">
+                <column name="comentarioprojeto_idcomentario" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

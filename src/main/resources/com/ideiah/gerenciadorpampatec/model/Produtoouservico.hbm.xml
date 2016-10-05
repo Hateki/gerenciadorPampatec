@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10/11/2015 15:34:29 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.ideiah.gerenciadorpampatec.model.Produtoouservico" table="produtoouservico" catalog="gerenciadorpampatec" optimistic-lock="version">
+        <id name="idProdutoOuServico" type="java.lang.Integer">
+            <column name="idProdutoOuServico" />
+            <generator class="identity" />
+        </id>
+        <property name="estagioEvolucao" type="string">
+            <column name="estagioEvolucao" length="300" />
+        </property>
+        <property name="tecnologiaProcessos" type="string">
+            <column name="tecnologiaProcessos" length="65535" />
+        </property>
+        <property name="potencialInovacaoTecnologica" type="string">
+            <column name="potencialInovacaoTecnologica" length="65535" />
+        </property>
+        <property name="aplicacoes" type="string">
+            <column name="aplicacoes" length="65535" />
+        </property>
+        <property name="dificuldadesEsperadas" type="string">
+            <column name="dificuldadesEsperadas" length="65535" />
+        </property>
+        <property name="interacaoEmpresaUniversidade" type="string">
+            <column name="interacaoEmpresaUniversidade" length="65535" />
+        </property>
+        <property name="interacaoEmpresaComunidadeGoverno" type="string">
+            <column name="interacaoEmpresaComunidadeGoverno" length="65535" />
+        </property>
+        <property name="infraestrutura" type="string">
+            <column name="infraestrutura" length="65535" />
+        </property>
+        <set name="projetos" table="projeto" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ProdutoOuServico_idProdutoOuServico" />
+            </key>
+            <one-to-many class="com.ideiah.gerenciadorpampatec.model.Projeto" />
+        </set>
+    </class>
+</hibernate-mapping>

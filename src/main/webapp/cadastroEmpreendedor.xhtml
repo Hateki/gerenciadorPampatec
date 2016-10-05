@@ -1,0 +1,237 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"> 
+    <h:head>
+
+        <f:facet name="last">
+            <h:outputStylesheet library="css" name="bootstrap.css"  />
+            <h:outputStylesheet library="css" name="projeto.css"  />
+            <h:outputStylesheet library="css" name="outro.css"  />
+
+        </f:facet>
+
+        <title>Realizar Cadastro</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+        <style>
+            @media print { 
+                .noprint { display:none; } 
+            </style>
+
+
+        </h:head>
+        <h:body>
+            <div class="col-md-3"></div>
+            <div class="col-md-6 form-horizontal well bs-component">
+                <h1>Realize seu cadastro</h1>
+                <div id="empreendedorLogin">
+                    <legend>Dados Cadastrais</legend>
+                    <h:outputLabel style="color: red">Obrigatório *</h:outputLabel>
+                    <h:form id="formularioCadastro">
+
+                        <div class="col-md-12" title="Digite o seu nome completo">
+
+                            <!--                             <div class="col-lg-8">
+                                                            <p:inputText id="nome" placeholder="Digite seu nome" required="true" styleClass="#//{not component.valid ? 'form-control campoInvalido' : 'form-control'}" requiredMessage="Insira o seu nome antes de enviar" value="#{candidatoBean.candidato.nome}"/>
+                                                            <h:message class="mensagemErro" for="nome"/>
+                                                        </div>-->
+
+
+                            Nome*
+                            <br/>
+                            <h:message class="mensagemErro" for="nome"/>
+                            <p:inputText id="nome" placeholder="Digite seu nome completo" class="form-control"
+                                         requiredMessage="Insira o seu nome antes de enviar" 
+                                         required="true" 
+                                         styleClass="#{not component.valid ? 'form-control campoInvalido' : 'form-control'}"
+                                         value="#{empreendedorBean.nome}">
+
+                            </p:inputText>
+
+
+                        </div>
+                        <div class="col-md-6" title="Digite o seu CPF">
+                            CPF*<br/>
+                            <h:message class="mensagemErro" for="cpf"/>
+                            <p:inputMask id="cpf" class="form-control" 
+                                         placeholder="ex: 999.999.999-99"
+                                         requiredMessage="Insira o seu CPF antes de enviar"
+                                         required="true"
+                                         mask="999.999.999-99"
+                                         styleClass="#{not component.valid ? 'form-control campoInvalido' : 'form-control'}"
+                                         value="#{empreendedorBean.cpf}">
+                            </p:inputMask>
+
+                        </div>
+                        <div class="col-md-6" title="Digite o seu telefone">
+                            Telefone* <br/>
+                            <h:message class="mensagemErro" for="telefone"/>
+                            <p:inputMask id="telefone" class="form-control" 
+                                         placeholder="ex:(99) 9999-9999"
+                                         requiredMessage="Insira o seu telefone"
+                                         required="true"
+                                         styleClass="#{not component.valid ? 'form-control campoInvalido' : 'form-control'}"
+                                         value="#{empreendedorBean.telefone}"
+                                         mask="(99) 9999-9999"
+                                         validatorMessage="Número inválido">
+
+                                <!--<f:validateRegex pattern="[0-9]*" />-->
+                            </p:inputMask>
+
+                        </div>
+                        <div class="col-md-12" title="Digite sua experiência">
+                            Experiências <p:inputTextarea class="form-control"
+                                                          placeholder="Digite sua experiência. Experiências incluem quaisquer atividades realizadas em âmbito profissional, seja com carteira assinada ou não"
+                                                          value="#{empreendedorBean.experiencia}"
+                                                          >
+                            </p:inputTextarea>
+                        </div>
+
+                        <div class="col-md-12" title="Digite a sua formação">
+                            Formação <p:inputTextarea class="form-control" 
+                                                      placeholder="Digite sua formação. Graduação, Mestrado, Doutorado, etc. Ex: Bacharelado em Engenharia de Software." 
+                                                      value="#{empreendedorBean.formacao}">
+                            </p:inputTextarea>
+                        </div>
+                        <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                        <p:dialog style="margin-left: 40%; margin-top: 20%" widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                            <h:graphicImage library="images" 
+                                            name="ajax-loader6.gif" 
+                                            alt="Carregando"/>
+                        </p:dialog>
+                        <legend>Endereço</legend>
+
+                        <div class="col-md-6" title="Digite o logradouro do seu endereço">
+                            Logradouro* <br/>
+                            <h:message class="mensagemErro" for="rua"/>
+                            <p:inputText id="rua" class="form-control"
+                                         placeholder="ex: Avenida Tiaraju"
+                                         requiredMessage="Insira o logradouro do seu endereço"
+                                         required="true"
+                                         styleClass="#{not component.valid ? 'form-control campoInvalido' : 'form-control'}"
+                                         value="#{empreendedorBean.rua}">
+                            </p:inputText>
+
+
+                        </div>
+                        <div class="col-md-6" title="Digite o número do seu endereço">
+                            Número* <br/>
+                            <h:message class="mensagemErro" for="numero"/>
+                            <p:inputText id="numero" class="form-control" 
+                                         placeholder="ex: 1406"
+                                         requiredMessage="Insira o número do seu endereço"
+                                         required="true" 
+                                         styleClass="#{not component.valid ? 'form-control campoInvalido' : 'form-control'}"
+                                         value="#{empreendedorBean.numero}"
+                                         validatorMessage="Número inválido">
+                                <f:validateRegex pattern="[0-9]*" />
+                            </p:inputText>
+
+
+                        </div>
+                        <div class="col-md-6" title="Digite o bairro do seu endereço">
+                            Bairro* <br/>
+                            <h:message class="mensagemErro" for="bairro"/>
+                            <p:inputText id="bairro" class="form-control" 
+                                         placeholder="ex:Ibirapuitã"
+                                         requiredMessage="Insira o bairro do seu endereço"
+                                         required="true"
+                                         styleClass="#{not component.valid ? 'form-control campoInvalido' : 'form-control'}"
+                                         value="#{empreendedorBean.bairro}">
+                            </p:inputText>
+
+
+                        </div>
+                        <div class="col-md-6" title="Digite o complemento do seu endereço">
+                            Complemento<p:inputText class="form-control" 
+                                                    placeholder="ex: sala 13"
+                                                    value="#{empreendedorBean.complemento}">
+                            </p:inputText>
+                            <br/>
+                        </div>
+
+                        <legend>Dados de Acesso</legend>
+
+                        <div class="col-md-12" title="Digite o seu e-mail">
+                            E-mail* <br/>
+                            <h:message class="mensagemErro" for="email"/>
+                            <p:inputText id="email" placeholder="ex: email@email.com" class="form-control" 
+                                         requiredMessage="Insira o seu E-mail antes de enviar"
+                                         required="true"
+                                         styleClass="#{not component.valid ? 'form-control campoInvalido' : 'form-control'}"
+                                         value="#{empreendedorBean.email}"
+                                         validatorMessage="E-mail inválido">
+                                <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                            </p:inputText>
+
+                        </div>
+
+                        <div class="col-md-6" title="Digite a sua senha">
+                            Senha* <br/>
+                            <h:message class="mensagemErro" for="senha"/>
+                            <p:password id="senha" class="form-control"
+                                        placeholder="Digite sua senha" 
+                                        requiredMessage="Insira sua senha"
+                                        required="true"
+                                        promptLabel="Força da senha" weakLabel="Fraca"
+                                        goodLabel="Mediana" strongLabel="Forte"
+                                        feedback="true"
+                                        styleClass="#{not component.valid ? 'form-control campoInvalido' : 'form-control'}"
+                                        value="#{empreendedorBean.senhaInput}"
+                                        match="senhaConfig" validatorMessage="Senha deve ser igual"></p:password>
+
+                        </div> 
+                        <div class="col-md-6" title="Digite novamente a sua senha para confirmação">
+                            Confirme sua senha* <br/>
+                            <h:message class="mensagemErro" for="senha"/>
+                            <p:password id="senhaConfig" class="form-control" 
+                                        placeholder="Confirme sua senha" 
+                                        requiredMessage="Confirme sua senha"
+                                        required="true"
+                                        styleClass="#{not component.valid ? 'form-control campoInvalido' : 'form-control'}"  
+                                        value="#{empreendedorBean.senhaInput}"></p:password>
+                            <br/>
+                        </div> 
+
+                        <div class="col-md-12 modal-footer">
+                            <h:message for="botaoEnviar" infoClass="mensagemSucesso" style="margin: 0 auto;" ></h:message>
+
+                            <div class="col-md-4 modal-footer">
+                                <!--<h:button class="btn btn-default" value="Voltar"></h:button>-->
+
+                                <p:button id="botaoVoltar"
+                                          class="botaoBase botaoPreto" 
+                                          title="Cancelar e voltar para a página de Login" 
+                                          value="Cancelar"
+                                          outcome="loginEmpreendedor.jsf"
+                                          icon="fa fa-ban"
+                                          >
+
+
+                                </p:button>
+                            </div>
+                            <div class="col-md-8 modal-footer">
+                                <p:commandButton id="botaoEnviar" 
+                                                 class="botaoBase botaoVerde" 
+                                                 title="Enviar os dados para a realização do Cadastro" 
+                                                 value="Finalizar Cadastro" 
+                                                 icon="fa fa-paper-plane-o"
+                                                 action="#{empreendedorBean.chamaCadastro()}"
+                                                 onclick="PF('statusDialog').show()" 
+                                                 ajax="false">
+                                </p:commandButton>
+                            </div>
+                        </div>
+                    </h:form>
+
+
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+
+        </h:body>
+    </html>

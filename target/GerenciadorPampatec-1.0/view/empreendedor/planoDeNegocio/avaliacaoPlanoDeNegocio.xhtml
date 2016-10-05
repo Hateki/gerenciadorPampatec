@@ -1,0 +1,154 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+
+        <f:facet name="last">
+            <h:outputStylesheet library="css" name="bootstrap.css"  />
+            <h:outputStylesheet library="css" name="outro.css"  />
+            <h:outputStylesheet library="css" name="projeto.css"  />
+            <h:outputStylesheet library="css" name="sweetalert.css" />            
+        </f:facet>
+
+        <h:outputScript library="js" name="jquery-2.2.2.min.js"/>
+        <h:outputScript library="js" name="bootstrap-3.3.6.min.js"/>
+	<h:outputScript library="js" name="avaliacao.js" />		
+        <h:outputScript library="js" name="chamaModal.js"/>        
+        <h:outputScript library="js" name="sweetalert.min.js" />  
+        <h:outputScript library="js" name="sessionManager.js"/> 
+
+        <title>Avaliação do Plano de Negócio</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        
+        <script> 
+            var andamentoProjeto = #{revisarPlanoDeNegocioBean.retornaStatusProjeto()};
+            var tempoMaxSessao = #{userBean.tempoMaximoSessao()};            
+    
+            /**
+             * 
+             * @returns {undefined}
+             */
+            setTimeout(function () {
+                console.log("Mata a sessão e chama o Bah!");
+                showSweetAlert();
+            }, (tempoMaxSessao - 1) * 1000);
+
+            /**
+             * <p> Método de gatilho para invalidar a sessão do usuário, 
+             * caso essa ainda exista indevidamente.</p>
+             * 
+             * @returns {undefined}
+             */
+            function triggerParaInvalidarSessao() {
+                // O metodo é chamado no sweetAlert somente para ativar um controle remoto
+                // esse controle remote aciona um metodo para invalidar a sessão quando o "bah!" é chamado.
+            }            
+        </script>
+        
+        
+        
+    </h:head>
+    <h:body onload="carregaPagina();">
+
+        <!-- Início do menu superior -->
+        <h:form id="menuSuperior">
+            
+            <!-- Controle Remoto que invalida a sessão, ele é acionado quando o sweetAlert (Bah!) é chamado -->
+            <p:remoteCommand name="triggerParaInvalidarSessao" 
+                             actionListener="#{userBean.finalizaSessao()}"/>
+            <!-- Fim do Controle Remoto-->   
+            
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="col-md-7">
+                        <h4 style="color: white;">Bem-vindo(a) <h:outputText value="#{userBean.retornaNomeLogado()}!"></h:outputText></h4>
+                    </div>
+                    <div class="col-md-5">
+                        <ul class="nav navbar-nav navbar-right">
+
+                            <li class="dropdown">
+                                <h:commandLink class="aComoBotaoMenu" value="Início" action="#{redirectManager.getInicioRevisar()}"></h:commandLink>
+                            </li>
+                            <!--
+                            <li class="">
+                                <h:outputLink class="dropdown-toggle" onclick="exibeNotificacoes()" value="#" id="barraNotificacoes">
+                                    Notificações
+                                    <span class="badge">
+                                        <h:outputText value="#-{notificacoesEmpreendedorBean.quantidadeNotificacoes}"></h:outputText> 
+                                    </span>
+                                    <f:ajax execute="@form" event="click" listener="#-{notificacoesEmpreendedorBean.mudaStatusNotificacao()}"/>
+                                </h:outputLink>
+                            </li>
+                            -->
+                            <li class="dropdown">
+                                <a href="#" class="aComoBotaoMenu" data-toggle="dropdown" role="button" aria-expanded="false">Planos de Negócio
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><h:commandLink action="#{projetoBean.criarNovoPlanoRevisar()}" value="Novo Plano"></h:commandLink></li>
+                                    <li><h:commandLink action="#{redirectManager.getVisualizarPlanosRevisar()}" value="Lista de Planos"></h:commandLink></li>
+                                </ul>
+                            </li>
+
+                            <li class="dropdown">
+                                <a href="#" class="aComoBotaoMenu" data-toggle="dropdown" role="button" aria-expanded="false">Opções <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><h:commandLink action="#{editarEmpreendedorBean.editarEmpreendedorRevisar()}" value="Perfil"></h:commandLink></li>
+                                    <li>
+                                        <h:commandLink  value="Sair" action="#{systemAccessBean.fazLogout()}">
+                                        </h:commandLink>
+                                    </li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- Inicio dos Modais apresentadas -->
+
+            <!-- Modal com as NOTIFICAÇÕES do usuário -->
+
+            <!-- Fim do Modal com as NOTIFICAÇÕES -->
+            
+            
+            
+            <!-- Fim das modais apresentadas -->
+            
+            
+            
+            <!-- SEÇÃO DO WORKFLOW HORIZONTAL -->
+            <div class="col-md-12 text-center noprint" style="background-color: #00A859;">
+                <ul id="progressbar">
+                    <li id="etapa1" class="active" style="cursor: pointer;"><a href="../enviarProjeto.jsf">Elaboração</a></li>
+                    <li id="etapa2" class="active" style="cursor: pointer;"><a href="revisarPlanoDeNegocio.jsf">Pré-Avaliação</a></li>
+                    <li id="etapa3" class="active etapaAtual" style="cursor: pointer;"><a onclick="mostra_avaliacao(), addFoco('etapa3')">Avaliação</a></li>
+                    <li id="etapa4" class="" style="cursor: pointer;"><a onclick="mostra_formalizacao(), addFoco('etapa4')">Formalização</a></li>
+                    <li id="etapa5" class="" style="cursor: pointer;"><a onclick="mostra_incubacao(), addFoco('etapa5')">Incubação</a></li>
+                </ul>
+            </div>
+
+        <!-- SEÇÃO DO WORKFLOW VERTICAL ETAPA AVALIACAO-->
+        
+        <div id="vertical_etapa_avaliacao" class="col-md-2 text-center estiloDivVertical noprint" >
+            <div class="divPadding">
+                <h:commandButton disabled="#{projetoBean.projeto.status != 2}" id="botao_agendamento" class="btn btn-success btnWorkflowV" value="Agendamento" onclick="addFocoBotao('botao_agendamento')"></h:commandButton><br/>
+            </div>
+            <div class="divPadding">
+                <h:commandButton disabled="#{projetoBean.projeto.status != 2}" id="botao_entrevista" class="btn btn-success btnWorkflowV" value="Entrevista" onclick="addFocoBotao('botao_entrevista')"></h:commandButton><br/>
+            </div>
+            <div class="divPadding">
+                <h:commandButton disabled="#{projetoBean.projeto.status != 2}" id="botao_parecer" class="btn btn-success btnWorkflowV" value="Parecer" onclick="addFocoBotao('botao_parecer')"></h:commandButton><br/>
+            </div>
+        </div>
+        
+        <!-- FIM DA SEÇÃO DO WORKFLOW VERTICAL ETAPA AVALIACAO-->
+
+
+
+        </h:form>
+    </h:body>
+</html>

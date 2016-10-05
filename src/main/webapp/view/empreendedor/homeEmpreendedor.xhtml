@@ -1,0 +1,180 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+
+        <f:facet name="last">
+            <h:outputStylesheet library="css" name="bootstrap.css"/>
+            <h:outputStylesheet library="css" name="sweetalert.css" />            
+            <h:outputStylesheet library="css" name="botaoCadastroNovoProjeto.css"  />
+            <h:outputStylesheet library="css" name="outro.css"  />
+            <h:outputStylesheet library="css" name="projeto.css"  />
+            <!--
+                <h:outputStylesheet library="css" name="flipclock.css" />
+            -->
+        </f:facet>
+
+        <h:outputScript library="js" name="jquery-2.2.2.min.js" />     
+        <h:outputScript library="js" name="bootstrap-3.3.6.min.js"/>    
+        <h:outputScript library="js" name="sweetalert.min.js" />        
+        <h:outputScript library="js" name="js.js"/>
+        <h:outputScript library="js" name="sessionManager.js"/>         
+
+        <title>Página Principal - Empreendedor</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+        <style>
+            @font-face {
+                font-family: lilyUPC;
+                src: url(lily.ttf);
+            }
+        </style>
+        <script>
+            var tempoMaxSessao = #{userBean.tempoMaximoSessao()};
+
+            /**
+             * 
+             * @returns {undefined}
+             */
+            setTimeout(function () {
+                console.log("Mata a sessão e chama o Bah!");
+                showSweetAlert();
+            }, (tempoMaxSessao - 1) * 1000);
+
+            /**
+             * <p> Método de gatilho para invalidar a sessão do usuário, 
+             * caso essa ainda exista indevidamente.</p>
+             * 
+             * @returns {undefined}
+             */
+            function triggerParaInvalidarSessao() {
+                // O metodo é chamado no sweetAlert somente para ativar um controle remoto
+                // esse controle remote aciona um metodo para invalidar a sessão quando o "bah!" é chamado.
+            }
+        </script>
+        <!--<meta http-equiv="refresh" content="#-{userBean.tempoMaximoSessao()};url=/GerenciadorPampatec/loginEmpreendedor.jsf"/>-->
+    </h:head>
+    <body>
+        <!-- Início do menu superior -->
+        <h:form id="menuSuperior">
+
+            <!-- Controle Remoto que invalida a sessão, ele é acionado quando o sweetAlert (Bah!) é chamado -->
+            <p:remoteCommand name="triggerParaInvalidarSessao" 
+                             actionListener="#{userBean.finalizaSessao()}"/>
+            <!-- Fim do Controle Remoto-->           
+
+            <ui:insert name="menu">
+                <ui:include src="../templateMenuSuperior.xhtml" />
+            </ui:insert>
+            <!-- Fim do menu superior -->
+
+            <!-- Inicio dos Modais apresentadas -->
+
+            <!-- Modal com as NOTIFICAÇÕES do usuário -->
+            <!--
+            <div class="modal fade" id="modalNotificacoes" role="dialog">
+
+                <div class="modal-dialog">
+
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h3 class="panel-title">Notificações</h3>
+                        </div>
+                        <div class="panel-body" align="center">
+                            <h:dataTable id="tabelaNotificacoes" value="#-{notificacoesEmpreendedorBean.notificacoes}" var="notificacao">
+                                <h:column>
+                                    <div class="bordas">
+                                        <h:outputText value="#-{notificacao.descricao}"/>
+                                        <a href="#-{notificacao.link}"> Clique aqui </a> Para ver detalhes.
+                                    </div>
+                                </h:column>
+                            </h:dataTable>
+                        </div>
+                        <div class="panel-footer" align="right">
+
+                            <button type="button" class="btn btn-success" data-dismiss="modal" aria-hidden="true" value="Voltar">Voltar</button>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            -->
+            <!-- Fim do Modal com as NOTIFICAÇÕES -->
+            <!-- Fim das modais apresentadas -->
+
+            <!-- Div botão Vizualizar/criar formulario e botão visualizar edital-->
+            <div class="col-md-12" text-align="center" style="padding-top: 1%">
+
+                <div class="col-md-4">
+
+                    <div class="col-md-9" style="border-style: solid; margin-top: -2%; margin-left: -2%">
+                        <h1 align="center" >
+                            Meu Plano de Negócio
+                        </h1>
+                    </div>
+                    <div class="col-md-3"></div>
+                </div>
+
+                <div class="col-md-2">
+                    <h:commandLink rendered="#{projetoBean.verificaCadastroProjeto()}" 
+                                   class="btn btn-success btn-lg" 
+                                   title="Cadastre um novo plano de negócio" 
+                                   action="#{projetoBean.criarNovoPlano()}">
+                        <label style="color: white; cursor: pointer;"><i class="fa fa-pencil-square-o fa-3x"></i> <br/>Novo Plano</label>
+                    </h:commandLink>
+                    <h:commandLink style="margin-left: " 
+                                   rendered="#{!projetoBean.verificaCadastroProjeto()}" 
+                                   class="btn btn-success btn-lg" 
+                                   title="Meus planos de negócio" 
+                                   action="#{redirectManager.enviaBuscaProjeto()}">
+                        <label style="color: white; cursor: pointer;"><i class="fa fa-file-text fa-3x"></i> <br/>Meus Planos</label>
+                    </h:commandLink>
+                </div>
+
+                <div class="col-md-2"></div>
+
+                <div class="col-md-2 text-center">
+                    <a class="btn btn-success btn-lg" title="Processo seletivo para ingresso na incubadora tecnológica PAMPATEC Alegrete" href="http://porteiras.s.unipampa.edu.br/pampatec/files/2015/06/Edital_186-2015_Pampatec.pdf" target="_blank"> 
+                        <label style="color: white; cursor: pointer;"><i class="fa fa-file-pdf-o fa-3x"></i> <br/> Edital N. 186/2015</label>
+                    </a>
+                </div>
+
+                <div class="col-md-4"></div>
+
+            </div>
+
+            <div class="col-md-10" style="margin: 1%"></div>
+            <!-- SEÇÃO STARTUP UNIPAMPA HTML EXTERNO -->
+
+            <div class="col-md-12" align="center">
+                <h2 style=" margin-bottom: 1%; color: black;">Processo de Incubação StartupPampa  </h2>
+                <iframe  width="100%" height="500px" src="http://startuppampa.com.br/processo_incubadora/#list">
+                </iframe>
+            </div>
+
+            <!-- SEÇÃO PARA INSERIR ALGUMA INFORMAÇÃO, COMO O WORKFLOW HORIZONTAL -->
+            <div class="col-md-12"></div>
+            <!-- FIM DA SEÇÃO DO WORKFLOW HORIZONTAL -->
+
+            <!-- SEÇÃO PARA INSERIR ALGUMA INFORMAÇÃO, COMO O WORKFLOW VERTICAL -->
+            <div class="col-md-2"></div>
+            <!-- FIM DA SERÃO DO WORKFLOW VERTICAL -->
+
+            <!-- SEÇÃO PARA INSERIR ALGUMA INFORMAÇÃO, COMO A DE APRESENTAÇÃO DOS FORMULÁRIOS -->
+            <div class="col-md-10"></div>
+            <!-- FIM DA SEÇÃO DE APRESENTAÇÃO DOS FORMULÁRIOS -->
+
+            <!--
+            <p:poll interval="3" update="barraNotificacoes"/>
+            <p:poll interval="3" update="tabelaNotificacoes"/>
+            -->
+        </h:form>
+        
+    </body>
+</html>

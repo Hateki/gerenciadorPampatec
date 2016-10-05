@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 20/09/2015 20:03:30 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="gerenciadorpampatec" name="com.ideiah.gerenciadorpampatec.model.Projeto" optimistic-lock="version" table="projeto">
+    <id name="idProjeto" type="java.lang.Integer">
+      <column name="idProjeto"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one cascade="all" class="com.ideiah.gerenciadorpampatec.model.Analiseemprego" fetch="select" name="analiseemprego">
+      <column name="AnaliseEmprego_idAnaliseEmprego"/>
+    </many-to-one>
+    <many-to-one cascade="all" class="com.ideiah.gerenciadorpampatec.model.Negocio" fetch="select" name="negocio">
+      <column name="Negocio_idNegocio"/>
+    </many-to-one>
+    <many-to-one cascade="all" class="com.ideiah.gerenciadorpampatec.model.Planofinanceiro" fetch="select" lazy="false" name="planofinanceiro">
+      <column name="PlanoFinanceiro_idPlanoFinanceiro"/>
+    </many-to-one>
+    <many-to-one cascade="all" class="com.ideiah.gerenciadorpampatec.model.Produtoouservico" fetch="select" lazy="false" name="produtoouservico">
+      <column name="ProdutoOuServico_idProdutoOuServico"/>
+    </many-to-one>
+    <many-to-one cascade="save-update" class="com.ideiah.gerenciadorpampatec.model.Empreendedor" fetch="select" name="empreendedorCorrespondente">
+      <column name="empreendedorCorrespondente"/>
+    </many-to-one>
+    <property name="nome" type="string">
+      <column length="300" name="nome"/>
+    </property>
+    <property name="dataEnvio" type="timestamp">
+      <column length="16" name="dataEnvio"/>
+    </property>
+    <property name="dataAvaliacao" type="timestamp">
+      <column length="16" name="dataAvaliacao"/>
+    </property>
+    <property name="status" type="java.lang.Integer">
+      <column name="status"/>
+    </property>
+    <property name="statusTemp" type="java.lang.Integer">
+      <column name="statusTemp"/>
+    </property>
+    <property name="potencialEmprego" type="string">
+      <column length="65535" name="potencialEmprego"/>
+    </property>
+    <property name="participacaoacionaria" type="string">
+      <column length="65535" name="participacaoacionaria"/>
+    </property>
+    <property name="edital" type="string">
+      <column length="45" name="edital"/>
+    </property>
+    <property name="dataCriacao" type="timestamp">
+      <column length="16" name="dataCriacao"/>
+    </property>
+    <set cascade="save-update" fetch="select" inverse="false" lazy="true" name="empreendedores" table="projeto_has_empreendedor">
+      <key>
+        <column name="Projeto_idProjeto" not-null="true"/>
+      </key>
+      <many-to-many entity-name="com.ideiah.gerenciadorpampatec.model.Empreendedor">
+        <column name="empreendedor_usuario_id_usuario" not-null="true"/>
+      </many-to-many>
+    </set>
+    <many-to-one class="com.ideiah.gerenciadorpampatec.model.GerenteRelacionamento" fetch="select" name="GerenteRelacionamento">
+      <column name="gerente_relacionamento_idgerente_relacionamento"/>
+    </many-to-one>
+    <set cascade="all" fetch="select" inverse="true" name="comentarioProjeto" table="comentarioprojeto">
+      <key>
+        <column name="projeto_idProjeto" not-null="true"/>
+      </key>
+      <one-to-many class="com.ideiah.gerenciadorpampatec.model.ComentarioProjeto"/>
+    </set>
+  </class>
+</hibernate-mapping>

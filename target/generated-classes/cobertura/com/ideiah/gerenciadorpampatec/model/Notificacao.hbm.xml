@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class dynamic-insert="false" dynamic-update="false" mutable="true" name="com.ideiah.gerenciadorpampatec.model.Notificacao" optimistic-lock="version" polymorphism="implicit" select-before-update="false">
+
+        <id name="idNotificacao" type="java.lang.Integer">
+            <column name="idnotificacao" />
+            <generator class="identity" />
+        </id>
+        
+        <many-to-one name="empreendedor" class="com.ideiah.gerenciadorpampatec.model.Empreendedor" fetch="select">
+            <column name="usuario_id_usuario" not-null="true" />
+        </many-to-one>
+        
+        <property name="visualizado" type="boolean">
+            <column name="visualizado" />
+        </property>
+  
+        <property name="descricao" type="string">
+            <column name="descricao" length="450" />
+        </property>
+        
+        <property name="link" type="string">
+            <column name="link" length="100" />
+        </property>
+    
+        
+    </class>
+</hibernate-mapping>

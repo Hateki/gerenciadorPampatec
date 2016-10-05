@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <f:facet name="last">
+            <h:outputStylesheet library="css" name="bootstrap.css"  />
+            <h:outputStylesheet library="css" name="projeto.css"  />
+            <h:outputStylesheet library="css" name="font-awesome.min.css"/>
+        </f:facet>
+
+        <h:outputScript library="js" name="jquery-2.2.2.min.js" />     
+        <h:outputScript library="js" name="bootstrap-3.3.6.min.js"/>            
+        <h:outputScript library="js" name="bootstrap.js" />        
+        
+        <title>Página não encontrada - Gerenciador Pampatec</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        
+        <main>
+        <div class="paginaErro well">
+            <h:form>
+                <div id="imagemPaginaErro">
+                    <h:graphicImage library="images" 
+                                    name="deathCuia.png" 
+                                    alt="Erro 404"/>
+                </div>
+            </h:form>
+            <h2>
+                <p>Bah, você tentou acessar uma página inexistente.</p>
+            </h2>
+            <p>Utilize o botão a baixo para acessar o sistema.</p>
+            
+            <h:form>
+                <div>
+                    <br/><br/>
+                    <a id="botaoLogin"
+                       class="aComoBotao"
+                       href="/GerenciadorPampatec/loginEmpreendedor.jsf"
+                       title="Redireciona para a página de login."
+                       style="padding: 8px 20px 8px 14px"
+                       >
+                        <i class="fa fa-sign-out"></i><strong>   Acesse sua conta</strong>
+                    </a>
+                </div>
+            </h:form>
+        </div>
+    </main>
+        
+        <!-- Início do footer profissional em HTML5+CCS3  -->
+        <footer class="rodapePaginaErro">
+            <nav>
+                <hr></hr>
+                <p>
+                    <small>Copyright © 2015-2016 </small> - <strong> Ideiah Soluções em Software</strong>
+                </p>
+                <hr></hr>
+            </nav>
+        </footer>
+        <!-- Fim do footer profissional em HTML5+CCS3  -->
+    </h:body>
+</html>

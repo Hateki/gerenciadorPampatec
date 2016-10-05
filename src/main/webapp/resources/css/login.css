@@ -1,0 +1,24 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 28/04/2016, 17:56:55
+    Author     : unipampa
+*/
+
+body{
+    /*Para evitar a barra de rolagem na página de login (em todos os monitores)*/
+    width: 98.5%;
+    background: #fff;
+    color: #727476;
+}
+
+.rodape {
+    /*Expande o rodape por toda a extensão do monitor.*/
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    bottom: 0px;
+}

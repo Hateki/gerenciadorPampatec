@@ -1,0 +1,193 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 09/09/2015, 15:19:39
+    Author     : Jhonatan Moura
+*/
+
+.erro {
+    color: red;
+}
+
+.sucesso {
+
+    color: greenyellow;
+    /*    color: #ffffff;
+        border-color: black;
+        padding: 15px 20px;
+        border-style: solid;
+        background-image: linear-gradient(, #EE5F5B 60%, #EC4D49);
+        background-repeat: no-repeat;
+        filter: none;
+        border-color: rgba(0, 0, 0, 0.6);
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);*/
+
+}
+
+.bordas {
+    padding: 5px;
+    text-align: center;
+    border-bottom: 2px solid #3FB618;
+
+}
+
+
+.fundoVerde {
+    color: white;
+    background-color: #00a859;
+}
+
+.espaco {
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.botaoEtapa {
+    width: 90%;
+    min-width: 90%;
+}
+
+
+.btnWorkflowV {
+    width: 88%;
+    text-align: center;
+    background-color: #62C462;
+    /*background-image: linear-gradient(#78CC78, #62C462 90%, #53BE53);*/
+    /*background-image: linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet);*/
+    /*background-image: linear-gradient(to top, #04DB22, #04DB85, #05FFE2);*/
+}
+
+.divPadding {
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+.bordaEstadoAtual {
+    border-width: 150px;
+    border-color: black;
+}
+
+.bordaEstadoVisualizado {
+    border-style: solid;
+    border-width: 2px;
+    border-color: yellow;
+}
+
+.bordaEstadoVisualizado:focus {
+    border-width: 2px;
+    border-color: yellow;
+}
+
+.bordaEstadoVisualizado:hover {
+    border-width: 2px;
+    border-color: yellow;
+}
+
+.btnEstadoAtual {
+    width: 88%;
+    text-align: center;
+    color: black;
+
+    /*background-image: linear-gradient(to top, yellow, orange, red);*/
+    background-image: linear-gradient(to top, #FF7500, #FF3300, #FF0009);
+    /*background-color: #EF7A37;*/
+}
+
+
+/*progressbar*/
+#progressbar {
+    margin-bottom: 1%;
+    overflow: hidden;
+    /*CSS counters to number the steps*/
+    counter-reset: step;
+}
+#progressbar li {
+    list-style-type: none;
+    color: white;
+    text-transform: uppercase;
+    font-size: 18px;
+    width: 20%;
+    float: left;
+    position: relative;
+    padding-top: 1%;
+}
+
+#progressbar li a {
+    color: white;
+    text-decoration: none;
+}
+
+#progressbar li a:hover {
+    color: #15569f;
+}
+
+
+#progressbar li:before {
+    content: counter(step);
+    counter-increment: step;
+    width: 40px; /* tamanho do quadrinho da etapa */
+    padding-top: 3%;
+    padding-bottom: 3%;
+    line-height: 20px;
+    display: block;
+    font-size: 18px;
+    color: #333;
+    background: white;
+    border-radius: 22px;
+    border-color: rgba(0, 0, 0, 0.6);
+    border-width: 3px;
+    border-style: solid;
+    margin: 0 auto 5px auto;
+    top: 35%;
+}
+/*progressbar connectors*/
+#progressbar li:after {
+    content: '';
+    width: 85%;
+    height: 5px;
+    background: white;
+    position: absolute;
+    left: -42.5%;
+    top: 35%;
+    border-color: black;
+    border-width: 1px;
+    border-style: solid;
+
+}
+
+#progressbar li:first-child:after {
+    /*connector not needed before the first step*/
+    content: none; 
+}
+/*marking active/completed steps green*/
+/*The number of the step and the connector before it = green*/
+#progressbar li.active:before,  #progressbar li.active:after{
+    color: black;
+    background-image: linear-gradient(to top, #04DB22, #04DB85, #05FFE2);
+}
+
+#progressbar li.etapaAtual:before,  #progressbar li.etapaAtual:after{
+    /*background-color: #62C462;*/
+    color: black;
+    /*background-image: linear-gradient(to top, yellow, orange, red);*/
+    background-image: linear-gradient(to top, #FF7500, #FF3300, #FF0009);
+    /*background-color: blue;*/
+}
+
+#progressbar li.etapaSelecionada:before,  #progressbar li.etapaSelecionada:after{
+    border-width: 2px;
+    border-style: solid;
+    border-color: yellow;
+}
+
+.botaoTabela{
+      background-color: #3fb618;
+
+}
+.botaoTabela:hover,
+.botaoTabela:focus{
+    background-color: #3fb618;
+}

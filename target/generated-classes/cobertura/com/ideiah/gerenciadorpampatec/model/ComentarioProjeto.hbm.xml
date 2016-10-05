@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10/11/2015 15:34:29 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class catalog="gerenciadorpampatec" name="com.ideiah.gerenciadorpampatec.model.ComentarioProjeto" optimistic-lock="version" table="comentarioprojeto">
+        <id name="idcomentario" type="java.lang.Integer">
+            <column name="idcomentario" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="projeto" class="com.ideiah.gerenciadorpampatec.model.Projeto" fetch="select" cascade="save-update">
+            <column name="projeto_idProjeto" not-null="true" />
+        </many-to-one>
+        <property name="nome" type="string">
+            <column name="nome" length="300" />
+        </property>
+        <property name="participacaoacionaria" type="string">
+            <column name="participacaoacionaria" length="65535" />
+        </property>
+        <property name="potencialemprego" type="string">
+            <column name="potencialemprego" length="65535" />
+        </property>
+        <property name="consideracoes" type="string">
+            <column name="consideracoes" length="65535" />
+        </property>
+        <property name="status" type="java.lang.Integer">
+            <column name="status" />
+        </property>
+        <property name="consideracoesPersonalizadas" type="string">
+            <column name="consideracoesPersonalizadas" length="65535" />
+        </property>
+        <set name="textocomentarios" table="comentarioprojeto_has_textocomentario" inverse="false" lazy="true" fetch="select" cascade="all">
+            <key>
+                <column name="comentarioprojeto_idcomentario" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.ideiah.gerenciadorpampatec.model.Textocomentario">
+                <column name="textocomentario_idtextocomentario" not-null="false" />
+            </many-to-many>
+        </set>        
+        <set name="alteracaocampos" table="alteracao_has_projeto" inverse="false" lazy="true" fetch="select" cascade="all">
+            <key>
+                <column name="comentarioprojeto_idcomentario" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.ideiah.gerenciadorpampatec.model.AlteracaoCampos">
+                <column name="alteracao_dos_campos_idalteracao_dos_campos" not-null="false" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

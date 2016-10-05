@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.ideiah.gerenciadorpampatec.model.GerenteRelacionamento" table="gerente_relacionamento">
+        <id name="idgerente_relacionamento" type="integer">
+            <column name="idgerente_relacionamento" />
+            <generator class="identity" />
+        </id>
+        <property name="senha" type="string">
+            <column name="senha" length="100"/>
+        </property>
+        <property name="nome" type="string">
+            <column name="nome" length="100" />
+        </property>
+        <property name="cpf" type="string">
+            <column name="cpf" length="16777215" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="45" />
+        </property>
+        <set name="projetos" table="projeto" inverse="true" fetch="select" cascade="all">
+            <key>
+                <column name="projeto_gerente_relacionamento_idgerente_relacionamento" />
+                
+            </key>
+            <one-to-many class="com.ideiah.gerenciadorpampatec.model.Projeto" />
+        </set>
+  
+    </class>
+  
+</hibernate-mapping>

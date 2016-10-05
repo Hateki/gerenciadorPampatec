@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10/11/2015 15:34:29 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="gerenciadorpampatec" name="com.ideiah.gerenciadorpampatec.model.Custo" optimistic-lock="version" table="custo">
+    <id name="idCusto" type="java.lang.Integer">
+      <column name="idcusto"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="com.ideiah.gerenciadorpampatec.model.Planofinanceiro" fetch="select" name="planofinanceiro">
+      <column name="planofinanceiro_idPlanoFinanceiro" not-null="true"/>
+    </many-to-one>
+    <property name="descricao" type="string">
+      <column length="100" name="descricao"/>
+    </property>
+    <property name="total" type="integer">
+      <column name="total" precision="12" scale="0"/>
+    </property>
+    <property name="tipo" type="java.lang.Integer">
+      <column name="tipo"/>
+    </property>
+    <property name="projecao" type="integer">
+      <column name="projecao" precision="12" scale="0"/>
+    </property>
+    <property name="podeExcluir" type="boolean">
+      <column name="podeExcluir" />
+    </property>
+  </class>
+</hibernate-mapping>
