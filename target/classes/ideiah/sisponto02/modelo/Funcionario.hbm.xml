@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16/08/2016 10:34:26 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="ideiah.sisponto02.modelo.Funcionario" table="funcionario"  optimistic-lock="version">
+        <id name="idfuncionario" type="java.lang.Integer">
+            <column name="idfuncionario" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="diretor" class="ideiah.sisponto02.modelo.Diretor" lazy="false" fetch="select" cascade="all">
+            <column name="Diretor_idDiretor" />
+        </many-to-one>
+        <many-to-one name="endereco" class="ideiah.sisponto02.modelo.Endereco" lazy="false" fetch="select" cascade="all">
+            <column name="Endereco_idEndereco" not-null="true" />
+        </many-to-one>
+        <property name="nome" type="string">
+            <column name="nome" length="45" not-null="true" />
+        </property>
+        <property name="matricula" type="string">
+            <column name="matricula" length="20" not-null="true" />
+        </property>
+        <property name="telefone" type="string">
+            <column name="telefone" length="15" not-null="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="50" not-null="true" />
+        </property>
+        <property name="cpf" type="string">
+            <column name="cpf" length="11" not-null="true" />
+        </property>
+        <property name="rg" type="string">
+            <column name="rg" length="15" not-null="true" />
+        </property>
+        <property name="estagioObrigatorio" type="boolean">
+            <column name="estagio_obrigatorio" not-null="true" />
+        </property>
+        <property name="ativo" type="boolean">
+            <column name="ativo" not-null="true" />
+        </property>
+        <property name="curso" type="string">
+            <column name="curso" length="100" not-null="true" />
+        </property>
+        <property name="instituicao" type="string">
+            <column name="instituicao" length="100" not-null="true" />
+        </property>
+        <property name="codigoAcesso" type="string">
+            <column name="codigo_acesso" length="15" not-null="true" />
+        </property>
+        <set name="pontos" table="ponto" inverse="true" lazy="false" fetch="select" cascade="save-update">
+            <key>
+                <column name="Funcionario_idfuncionario" not-null="true" />
+            </key>
+            <one-to-many class="ideiah.sisponto02.modelo.Ponto" />
+        </set>
+    </class>
+</hibernate-mapping>

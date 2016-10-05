@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:fragment
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+
+    <!-- *****************************************************************************************************************
+     CORPO
+     ***************************************************************************************************************** -->
+    <div id="headerwrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <h2>Bem-vindo a Ideiah!</h2>
+                    <h3>Antes de iniciar o seu dia de trabalho, dê entrada no seu ponto digitando seu código de acesso abaixo.</h3>
+                    <h3>Atenção, não esqueça de fechar seu ponto ao término do seu dia de trabalho, repetindo o processo.</h3>
+
+                </div>
+                <div class="col-lg-8 col-lg-offset-2 himg">
+                    <h:form class="form-signin" id="marcaPonto" >
+                        <h:inputSecret class="form-control" id="iCodigo" value="#{beanMarcarPonto.codigo_acesso}" a:placeholder="Digite seu código de acesso aqui" a:autofocus="true"/>    
+                        <br/>
+                        <h:commandButton class="btn btn-lg btn-primary" value="Marcar Ponto" actionListener="#{beanMarcarPonto.marcarPonto()}">
+                            <f:ajax render="iCodigo"/>
+                            <!-- Atributo para impedir que a página recarregue -->
+                            <f:ajax execute="@form" render="modals" onevent="abrirModal"/>
+                        </h:commandButton>
+
+                        <h:panelGroup layout="block" id="modals">
+                            <!--Mensagem de sucesso para ponto aberto-->
+                            <c:if test="${beanMarcarPonto.ponto.status and beanMarcarPonto.funcionario != null}">
+                                <ui:include src="../feedbacks/MensagemSucesso.xhtml">
+                                    <ui:param name="mensagemPrincipal" value="Olá, #{beanMarcarPonto.funcionario.nome} seu registro de ponto foi aberto."/>
+                                    <ui:param name="mensagemSecundaria" value="Tenha um bom dia de trabalho e não se esqueça de fechar o ponto ao final do seu dia de trabalho e informar as atividades realizadas no dia."/>
+                                    <ui:param name="titulo" value="Ponto Aberto!"/>
+                                </ui:include>
+                            </c:if>
+
+                            <!--Mensagem de sucesso para ponto fechado-->
+                            <c:if test="${!beanMarcarPonto.ponto.status and beanMarcarPonto.ponto.saida !=null}">
+                                <ui:include src="../feedbacks/MensagemSucesso.xhtml">
+                                    <ui:param name="mensagemPrincipal" value="Olá, #{beanMarcarPonto.funcionario.nome} seu registro de ponto foi fechado."/>
+                                    <ui:param name="mensagemSecundaria" value="Tenha um bom descanso! Até breve!"/>
+                                    <ui:param name="titulo" value="Ponto Fechado"/>
+                                </ui:include>
+                            </c:if>
+
+                            <!--Mensagem de solicitação para informar atividade realizada para fechar ponto-->
+
+                            <c:if test="${!beanMarcarPonto.ponto.status and beanMarcarPonto.funcionario != null and beanMarcarPonto.funcionario.ativo}">
+                                <!-- Modal -->
+                                <div class="modal fade" id="myModal" role="dialog">
+                                    <div class="modal-dialog">
+
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title">Fechando o Ponto!</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Olá, <h:outputText value="#{beanMarcarPonto.funcionario.nome}"/>.</p>
+                                                <p>Informe abaixo as atividades realizadas por você hoje na empresa para concluir o fechamento do ponto.</p>
+                                                <h:inputTextarea cols="70" rows="10"  value="#{beanMarcarPonto.atividadeRealizada}"> 
+                                                    <f:ajax event="keyup" delay="200" render="regAtividade" />
+                                                </h:inputTextarea>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-lg btn-default" style="float: left" id="closeModal" data-dismiss="modal">Cancelar</button>
+
+                                                <h:commandButton class="btn btn-lg btn-info" value="Registrar Atividade" id="regAtividade" onclick="ativaCancelar()" disabled="#{empty beanMarcarPonto.atividadeRealizada.trim()}" actionListener="#{beanMarcarPonto.saidaPonto()}">
+                                                    <f:ajax execute="@form" render="marcaPonto:modals" onevent="abrirModal"/>
+                                                </h:commandButton>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </c:if>
+                            <!--Mensagem de erro para código informado vazio ou incorreto.-->
+
+                            <c:if test="${beanMarcarPonto.funcionario == null}">
+                                <ui:include src="../feedbacks/MensagemErro.xhtml">
+                                    <ui:param name="mensagemPrincipal" value="O código de acesso informado não foi encontrado em nossos registros."/>
+                                    <ui:param name="mensagemSecundaria" value="Por favor, verifique se o código inserido está correto. Verifique também se a tecla CAPS LOCK está desativada."/>
+                                    <ui:param name="titulo" value="Código de Acesso Incorreto!"/>
+                                </ui:include>
+                            </c:if>
+                            <c:if test="${beanMarcarPonto.funcionario != null and !beanMarcarPonto.funcionario.ativo}">
+                                <ui:include src="../feedbacks/MensagemErro.xhtml">
+                                    <ui:param name="mensagemPrincipal" value="O funcionário #{beanMarcarPonto.funcionario.nome} esta com status 'Desativado'."/>
+                                    <ui:param name="mensagemSecundaria" value="Por favor, verifique se o código inserido está correto. Contate o setor de suporte para auxilia-lo."/>
+                                    <ui:param name="titulo" value="Funcionário Desativado!"/>
+                                </ui:include>
+                            </c:if>
+                        </h:panelGroup>
+
+                    </h:form>
+                </div>
+            </div><!-- /row -->
+        </div> <!-- /container -->
+    </div><!-- /headerwrap -->
+
+</ui:fragment>

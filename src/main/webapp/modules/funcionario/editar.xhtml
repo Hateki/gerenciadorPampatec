@@ -1,0 +1,273 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+    <body>
+
+        <ui:composition template="/WEB-INF/Template.xhtml">
+
+            <ui:param name="onLoadJs" value="abriModalMensagemSucesso(); escondeDivDiretor('formCadastro:cargo');"/>
+
+            <ui:define name="title">
+                SisPonto - Edição de Funcionário
+            </ui:define>
+
+            <ui:define name="conteudo">
+
+                <!--main content start-->
+                <section id="main-content">
+                    <section class="wrapper">            
+                        <!--overview start-->
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h3 class="page-header"><i class="fa fa-user"></i> Funcionários</h3>
+                                <ol class="breadcrumb">
+                                    <li><i class="fa fa-home"></i><h:link outcome="/index.xhtml">Página Inicial</h:link></li>
+                                    <li><i class="fa fa-user"></i><h:link outcome="lista.xhtml">Funcionários</h:link></li>
+                                    <li><i class="fa fa-plus"></i><i>Cadastrar</i></li>
+                                </ol>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-info alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <p>Para alterar o cadastro de um funcionário, preencha os campos abaixo, lembrando que os campos marcados com "*" são campos obrigatórios.
+                            </p>
+                        </div>
+                        <h:message id="mensagens" for="mensagens" errorClass="alert alert-danger" infoClass="alert alert-success" warnClass="alert alert-warning" style="display: block"/> 
+
+                        <h:link styleClass="btn btn-primary btn-lg" outcome="lista"><span class="fa fa-arrow-left"></span> Voltar</h:link>
+                        <br/>
+                        <br/>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <section class="panel">
+                                    <header class="panel-heading">
+                                        <h1>Formulário de Edição</h1>
+                                    </header>
+                                    <div class="panel-body">
+                                        <div class="form">
+                                            <h:form id="formCadastro" >
+
+                                                <div class="form-group">
+                                                    <h3>Dados de Acesso</h3>
+                                                    <hr></hr>
+                                                    <div class="row">
+
+                                                        <label for="cargo" class="control-label col-lg-2">Cargo do Funcionário<span class="required">*</span></label>
+                                                        <div class="input col-lg-4">
+                                                            <h:selectOneMenu  id="cargo" value="#{beanFuncionario.cargoFuncionario}" onchange="escondeDivDiretor('formCadastro:cargo')" class="form-control" 
+                                                                              required="true" requiredMessage="Por favor, selecione o status da disciplina." 
+                                                                              >
+                                                                <f:selectItem itemLabel="Desenvolvedor" itemValue="Desenvolvedor"/>
+                                                                <f:selectItem itemLabel="Diretor Presidente" itemValue="Diretor Presidente"/>
+                                                                <f:selectItem itemLabel="Diretor Administrativo" itemValue="Diretor Administrativo" />
+                                                                <f:selectItem itemLabel="Diretor de Negócio" itemValue="Diretor de Negócio"/>
+                                                                <f:selectItem itemLabel="Diretor de Desenvolvimento" itemValue="Diretor de Desenvolvimento"/>
+                                                                <!--                                                                <f:ajax event="click" render="formCadastro:senhaDiretor1 formCadastro:senhaDiretor2 formCadastro:painelGroupPosse"></f:ajax>-->
+
+                                                            </h:selectOneMenu>
+
+                                                        </div>
+
+                                                        <label for="codigoAcesso" class="control-label col-lg-2">Códido do Funcionário<span class="required">*</span></label>
+                                                        <div class="input col-lg-4">
+                                                            <h:inputText  class="form-control" value="#{beanFuncionario.funcionario.codigoAcesso}" p:placeholder="Informe o código de acesso único. Ex.: 12Pt98" id="codigoAcesso" required="true" maxlength="15" requiredMessage="O campo deve ser preenchido."/> 
+                                                            <h:message for="codigoAcesso" style="color: red" />
+                                                        </div>
+
+                                                    </div>
+                                                    <!-- Início da div que contém os dadsos do diretor e que pode aparecer desaparecer dependo da situação. -->
+                                                    <div id="divDadosDiretor" class="divDinamicaNone">
+                                                        <div class="row">
+                                                            <label for="senhaDiretor1" class="control-label col-lg-2">Nova senha do Diretor<span class="required">*</span></label>
+                                                            <div class="input col-lg-4">
+
+                                                                <h:inputSecret class="form-control" p:placeholder="Informe a senha do Diretor. Ex.: pass123" value="#{beanFuncionario.senhaDiretor}" id="senhaDiretor1" required="false" requiredMessage="O campo deve ser preenchido.">
+                                                                    <!--                                                                <f:ajax event="change" execute="senhaDiretor1"></f:ajax>-->
+                                                                </h:inputSecret>
+                                                                <h:message for="senhaDiretor1" style="color: red" />
+
+                                                            </div>
+
+                                                            <label for="senhaDiretor2" class="control-label col-lg-2">Confirme nova Senha<span class="required">*</span></label>
+                                                            <div class="input col-lg-4">
+                                                                <h:inputSecret  class="form-control" p:placeholder="Confirme a senha do Diretor. Ex.: pass123" value="#{beanFuncionario.confirmarSenhaDiretor}" id="senhaDiretor2" required="false" requiredMessage="O campo deve ser preenchido.">
+
+                                                                </h:inputSecret>
+                                                                <h:message for="senhaDiretor2" id="senhaDiretor2Mess" style="color: red" />
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <label for="datepicker" class="control-label col-lg-2">Data da Posse<span class="required">*</span></label>
+                                                            <div class="input col-lg-4">
+                                                                <h:inputText class="form-control" id="datepicker" value="#{beanFuncionario.dataPosseString}"/>
+                                                                <h:message for="datepicker"  style="color: red" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Fim da div que contém os dadsos do diretor  -->
+
+                                                    <h3>Dados de Cadastrais</h3>
+                                                   <hr></hr>
+
+                                                    <div class="row">
+                                                        <label for="nome" class="control-label col-lg-1">Nome<span class="required">*</span></label>
+                                                        <div class="input col-lg-5">
+                                                            <h:inputText  class="form-control" p:placeholder="Informe o nome completo do funcionário. Ex.: Galvão Bueno" value="#{beanFuncionario.funcionario.nome}" id="nome" required="true" requiredMessage="O campo deve ser preenchido." maxlength="45"> 
+                                                            </h:inputText>
+                                                            <h:message for="nome" style="color: red" />
+                                                        </div>
+
+                                                        <label for="email" class="control-label col-lg-1">Email <span class="required">*</span></label>
+                                                        <div class="input col-lg-5">
+                                                            <h:inputText  class="form-control" p:placeholder="Informe o email do funcionário. Ex.: email@email.com" value="#{beanFuncionario.funcionario.email}" id="email" required="true" maxlength="50" requiredMessage="O campo deve ser preenchido."/> 
+                                                            <h:message for="email" style="color: red" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <label for="cpf" class="control-label col-lg-1">Nº CPF<span class="required">*</span></label>
+                                                        <div class="input col-lg-5">
+                                                            <h:inputText  class="form-control" p:placeholder="Número do CPF, sem caracteres especiais. Ex.: 99999999999" onkeypress="return SomenteNumero(event)" value="#{beanFuncionario.funcionario.cpf}" id="cpf" required="true" maxlength="11" requiredMessage="O campo deve ser preenchido."/> 
+                                                            <h:message for="cpf" style="color: red" />
+                                                        </div>
+
+                                                        <label for="rg" class="control-label col-lg-1">Nº RG</label>
+                                                        <div class="input col-lg-5">
+                                                            <h:inputText  class="form-control" p:placeholder="Número do RG, sem caracteres especiais. Ex.: 999999" value="#{beanFuncionario.funcionario.rg}" id="rg" maxlength="15" /> 
+                                                            <h:message for="rg" style="color: red" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <label for="matricula" class="control-label col-lg-1">Matrícula<span class="required">*</span></label>
+                                                        <div class=" input col-lg-5">
+                                                            <h:inputText  class="form-control" p:placeholder="Número de matrícula. Ex.: 131113119" onkeypress="return SomenteNumero(event)" value="#{beanFuncionario.funcionario.matricula}" maxlength="20"  id="matricula" required="true" requiredMessage="O campo deve ser preenchido."/> 
+                                                            <h:message for="matricula" style="color: red" />
+                                                        </div>
+
+                                                        <label for="instituicao" class="control-label col-lg-1">Instituição<span class="required">*</span></label>
+                                                        <div class="input col-lg-5">
+                                                            <h:inputText  class="form-control" p:placeholder="Sigla de sua institução. Ex.: UNIPAMPA, IFF, UFRGS." value="#{beanFuncionario.funcionario.instituicao}" id="instituicao" required="true" maxlength="100" requiredMessage="O campo deve ser preenchido."/> 
+                                                            <h:message for="instituicao" style="color: red" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <label for="curso" class="control-label col-lg-1">Curso<span class="required">*</span></label>
+                                                        <div class="input col-lg-5">
+                                                            <h:inputText  class="form-control" p:placeholder="Ex.: Engenharia de Software, Ciência da Computação." value="#{beanFuncionario.funcionario.curso}" id="curso" required="true" maxlength="100" requiredMessage="O campo deve ser preenchido."/> 
+                                                            <h:message for="curso" style="color: red" />
+                                                        </div>
+
+                                                        <label for="telefone" class="control-label col-lg-1">Telefone<span class="required">*</span></label>
+                                                        <div class="input col-lg-5">
+                                                            <h:inputText  class="form-control" p:placeholder="Número de telefone. Ex.: 5599973092" onkeypress="return SomenteNumero(event)" value="#{beanFuncionario.funcionario.telefone}" id="telefone" required="true" maxlength="15" requiredMessage="O campo deve ser preenchido."/> 
+                                                            <h:message for="telefone" style="color: red" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+
+                                                        <label for="est" class="control-label col-lg-2">Estágio Obrigatório?</label>
+                                                        <div class="col-lg-4">
+                                                            <h:selectBooleanCheckbox value="#{beanFuncionario.funcionario.estagioObrigatorio}" id="est" style="margin-top: 12px; transform: scale(1.5)">
+                                                            </h:selectBooleanCheckbox>                                                      
+                                                        </div>
+                                                        <label for="status" class="control-label col-lg-2">Funcionário Ativo?</label>
+                                                        <div class="col-lg-4">
+                                                            <h:selectBooleanCheckbox value="#{beanFuncionario.funcionario.ativo}" id="status" style="margin-top: 12px; transform: scale(1.5)">
+                                                            </h:selectBooleanCheckbox>                                                      
+                                                        </div>
+                                                    </div>
+
+                                                    <h3>Endereço</h3>
+                                                    <hr></hr>
+                                                    <div class="row">
+                                                        <label for="cidade" class="control-label col-lg-1">Cidade<span class="required">*</span></label>
+                                                        <div class="input col-lg-4">
+                                                            <h:inputText  class="form-control"  p:placeholder="Nome da cidade. Ex.: Alegrete" value="#{beanFuncionario.funcionario.endereco.cidade}" id="cidade" required="true" maxlength="20" requiredMessage="O campo deve ser preenchido."/> 
+                                                            <h:message for="cidade" style="color: red" />
+                                                        </div>
+                                                        <label for="estado" class="control-label col-lg-1">Estado<span class="required">*</span></label>
+                                                        <div class="input col-lg-2">
+                                                            <h:inputText  class="form-control"  p:placeholder="Sigla. Ex.: RS, SC, SP." value="#{beanFuncionario.funcionario.endereco.estado}" id="estado" required="true" maxlength="20" requiredMessage="O campo deve ser preenchido."/> 
+                                                            <h:message for="estado" style="color: red" />
+                                                        </div>
+                                                        <label for="logradouro" class="control-label col-lg-1">Logradouro<span class="required">*</span></label>
+                                                        <div class="input col-lg-2">
+                                                            <h:inputText  class="form-control" p:placeholder="Ex.: Rua, Av, Estrada." value="#{beanFuncionario.funcionario.endereco.logradouro}" id="logradouro" required="true" maxlength="30" requiredMessage="O campo deve ser preenchido."/> 
+                                                            <h:message for="logradouro" style="color: red" />
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="row">
+
+
+                                                        <label for="rua" class="control-label col-lg-1">Rua<span class="required">*</span></label>
+                                                        <div class="input col-lg-4">
+                                                            <h:inputText  class="form-control" p:placeholder="Ex.: General Arruda" value="#{beanFuncionario.funcionario.endereco.rua}" id="rua" required="true" maxlength="30" requiredMessage="O campo deve ser preenchido."/> 
+                                                            <h:message for="rua" style="color: red" />
+                                                        </div>
+                                                        <label for="bairro" class="control-label col-lg-1">Bairro<span class="required">*</span></label>
+                                                        <div class="input col-lg-2">
+                                                            <h:inputText  class="form-control" p:placeholder="Ex.: Centro, Macedo, Ibirapuitã." value="#{beanFuncionario.funcionario.endereco.bairro}" id="bairro" required="true" maxlength="30" requiredMessage="O campo deve ser preenchido."/> 
+                                                            <h:message for="bairro" style="color: red" />
+                                                        </div>
+                                                        <label for="numero" class="control-label col-lg-1">Número<span class="required">*</span></label>
+                                                        <div class="input col-lg-2">
+                                                            <h:inputText  class="form-control" p:placeholder="Ex.: 441, 391." onkeypress="return SomenteNumero(event)" value="#{beanFuncionario.funcionario.endereco.numero}" id="numero" required="true" requiredMessage="O campo deve ser preenchido."/> 
+                                                            <h:message for="numero" style="color: red" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <label for="complemento" class="control-label col-lg-1" style="margin-right: 1%;">Complemento</label>
+                                                        <div class="input col-lg-4">
+                                                            <h:inputText  class="form-control" p:placeholder="Ex.: Beira Trilho" value="#{beanFuncionario.funcionario.endereco.complemento}" id="complemento" maxlength="30"/> 
+                                                            <h:message for="complemento" style="color: red" />
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="form-group ">
+
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-lg-offset-2 col-lg-10">
+                                                        <h:commandButton id="salvarFuncionario" action="#{beanFuncionario.editarFuncionario()}" class="btn btn-success" value="Alterar">
+                                                        </h:commandButton>                                                            
+                                                        <h:link styleClass="btn btn-default" outcome="lista" style="margin-left: 10px"> Cancelar</h:link>
+                                                    </div>
+                                                </div>
+
+                                                <ui:repeat value="#{facesContext.getMessageList('formCadastro:salvarFuncionario')}" var="mensagem">
+                                                    <ui:include src="../feedbacks/MensagemSucesso.xhtml">
+                                                        <ui:param name="mensagemPrincipal" value="A edição foi realizada com sucesso"/>
+                                                        <ui:param name="titulo" value="Edição Realizada"/>
+                                                    </ui:include>
+                                                </ui:repeat>
+                                            </h:form>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+
+                    </section>
+                </section>
+                <!--main content end-->
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

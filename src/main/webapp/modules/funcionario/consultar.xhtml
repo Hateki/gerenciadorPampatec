@@ -1,0 +1,327 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="/WEB-INF/Template.xhtml">
+
+            <ui:define name="title">
+                SisPonto - Visualização de Funcionário
+            </ui:define>
+
+            <ui:define name="conteudo">
+
+                <!--main content start-->
+                <section id="main-content">
+                    <section class="wrapper">            
+                        <!--overview start-->
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h3 class="page-header"><i class="fa fa-user"></i> Funcionários</h3>
+                                <ol class="breadcrumb">
+                                    <li><i class="fa fa-home"></i><h:link outcome="/index.xhtml">Página Inicial</h:link></li>
+                                    <li><i class="fa fa-user"></i><h:link outcome="lista.xhtml">Funcionários</h:link></li>
+                                    <li><i class="fa fa-plus"></i><i>Cadastrar</i></li>
+                                </ol>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-info alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <p>Para realizar o cadastro de um novo registro, preencha os campos abaixo, lembrando que os campos marcados com "*" são campos obrigatórios.
+                            </p>
+                        </div>
+                        <h:message id="mensagens" for="mensagens" errorClass="alert alert-danger" infoClass="alert alert-success" warnClass="alert alert-warning" style="display: block"/> 
+
+                        <h:link styleClass="btn btn-primary btn-lg" outcome="lista"><span class="fa fa-arrow-left"></span> Voltar</h:link>
+                        <br/>
+                        <br/>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <section class="panel">
+                                    <header class="panel-heading">
+                                        Informações de Funcionário
+                                    </header>
+                                    <div class="panel-body">
+                                        <div class="form">
+                                            <h:form class="formCadastro" role="form">
+
+                                                <div class="form-group">
+
+                                                    <h3>Dados de Acesso</h3>
+                                                    <hr></hr>
+                                                    <div class="row">
+                                                        <!-- Início da div que contém os dadsos do diretor e que pode aparecer desaparecer dependo da situação. -->
+
+                                                        <label for="cargoDiretor" class="control-label col-lg-2">Cargo Funcionário:</label>
+                                                        <div class="input col-lg-4">
+                                                            <h:outputText value="#{beanFuncionario.cargoFuncionario}" id="cargoDiretor"/>
+                                                        </div>
+
+                                                        <label for="codigoAcesso" class="control-label col-lg-2">Códido do Funcionário:</label>
+                                                        <div class="input col-lg-4">
+                                                            <h:outputText   value="#{beanFuncionario.funcionario.codigoAcesso}" id="codigoAcesso"/> 
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="row">
+
+                                                        <h:panelGroup layout="block" rendered="#{beanFuncionario.dataPosseString != null}">
+
+                                                            <label for="dataPosse" class="control-label col-lg-2">Data de Posse:</label>
+                                                            <div class="input col-lg-4">
+                                                                <h:outputText value="#{beanFuncionario.dataPosseString}" id="dataPosse"/>
+                                                            </div>
+                                                        </h:panelGroup>
+                                                    </div>
+                                                    <!-- Fim da div que contém os dadsos do diretor  -->
+
+
+                                                    <h3>Dados de Cadastrais</h3>
+                                                    <hr></hr>
+
+                                                    <div class="row">
+                                                        <label for="nome" class="control-label col-lg-1">Nome:</label>
+                                                        <div class="input col-lg-5">
+                                                            <h:outputText   value="#{beanFuncionario.funcionario.nome}" id="nome"> 
+                                                            </h:outputText>
+                                                        </div>
+
+                                                        <label for="email" class="control-label col-lg-1">Email:</label>
+                                                        <div class="input col-lg-5">
+                                                            <h:outputText   value="#{beanFuncionario.funcionario.email}" id="email"/> 
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <label for="cpf" class="control-label col-lg-1">Nº CPF:</label>
+                                                        <div class="input col-lg-5">
+                                                            <h:outputText   value="#{beanFuncionario.funcionario.cpf}" id="cpf"/> 
+                                                        </div>
+
+                                                        <label for="rg" class="control-label col-lg-1">Nº RG:</label>
+                                                        <div class="input col-lg-5">
+                                                            <h:outputText   value="#{beanFuncionario.funcionario.rg}" id="rg" /> 
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <label for="matricula" class="control-label col-lg-1">Matrícula:</label>
+                                                        <div class=" input col-lg-5">
+                                                            <h:outputText   value="#{beanFuncionario.funcionario.matricula}" id="matricula"/> 
+                                                        </div>
+
+                                                        <label for="instituicao" class="control-label col-lg-1">Instituição:</label>
+                                                        <div class="input col-lg-5">
+                                                            <h:outputText   value="#{beanFuncionario.funcionario.instituicao}" id="instituicao"/> 
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <label for="curso" class="control-label col-lg-1">Curso:</label>
+                                                        <div class="input col-lg-5">
+                                                            <h:outputText   value="#{beanFuncionario.funcionario.curso}" id="curso"/> 
+                                                        </div>
+
+                                                        <label for="telefone" class="control-label col-lg-1">Telefone:</label>
+                                                        <div class="input col-lg-5">
+                                                            <h:outputText   value="#{beanFuncionario.funcionario.telefone}" id="telefone"/> 
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+
+
+                                                        <label for="est" class="control-label col-lg-2">Estágio Obrigatório?</label>
+                                                        <div class="input col-lg-4">
+                                                            <h:graphicImage name="assets/img/ok.png" rendered="#{beanFuncionario.funcionario.estagioObrigatorio}"/>
+                                                            <h:graphicImage name="assets/img/delete_256.png" rendered="#{!beanFuncionario.funcionario.estagioObrigatorio}"/>
+
+                                                        </div>
+
+                                                        <label for="est" class="control-label col-lg-2">Funcionário Ativo?</label>
+                                                        <div class="input col-lg-4">
+                                                            <h:graphicImage name="assets/img/ok.png" rendered="#{beanFuncionario.funcionario.ativo}"/>
+                                                            <h:graphicImage name="assets/img/delete_256.png" rendered="#{!beanFuncionario.funcionario.ativo}"/>
+
+                                                        </div>
+                                                    </div>
+
+                                                    <h3>Endereço</h3>
+                                                    <hr></hr>
+                                                    <div class="row">
+                                                        <label for="cidade" class="control-label col-lg-1">Cidade:</label>
+                                                        <div class="input col-lg-4">
+                                                            <h:outputText   value="#{beanFuncionario.funcionario.endereco.cidade}" id="cidade"/> 
+                                                        </div>
+                                                        <label for="estado" class="control-label col-lg-1">Estado:</label>
+                                                        <div class="input col-lg-2">
+                                                            <h:outputText   value="#{beanFuncionario.funcionario.endereco.estado}" id="estado"/> 
+                                                        </div>
+                                                        <label for="logradouro" class="control-label col-lg-1">Logradouro:</label>
+                                                        <div class="input col-lg-2">
+                                                            <h:outputText   value="#{beanFuncionario.funcionario.endereco.logradouro}" id="logradouro"/> 
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="row">
+
+
+                                                        <label for="rua" class="control-label col-lg-1">Rua:</label>
+                                                        <div class="input col-lg-4">
+                                                            <h:outputText   value="#{beanFuncionario.funcionario.endereco.rua}" id="rua" /> 
+                                                        </div>
+                                                        <label for="bairro" class="control-label col-lg-1">Bairro:</label>
+                                                        <div class="input col-lg-2">
+                                                            <h:outputText   value="#{beanFuncionario.funcionario.endereco.bairro}" id="bairro" /> 
+                                                        </div>
+                                                        <label for="numero" class="control-label col-lg-1">Número:</label>
+                                                        <div class="input col-lg-2">
+                                                            <h:outputText   value="#{beanFuncionario.funcionario.endereco.numero}" id="numero" /> 
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <label for="complemento" class="control-label col-lg-1" style="margin-right: 1%;">Complemento:</label>
+                                                        <div class="input col-lg-4">
+                                                            <h:outputText    value="#{beanFuncionario.funcionario.endereco.complemento}" id="complemento"/> 
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+
+
+
+                                                <!--                                                <label for="nome" class="control-label col-lg-2">Nome<span class="required">*</span></label>
+                                                                                                <div class="input col-lg-10">
+                                                                                                    <h:outputText value="#{beanFuncionario.funcionario.nome}" id="nome"/>
+                                                                                                </div>
+                                                
+                                                                                                <h:panelGroup layout="block" rendered="#{beanFuncionario.dataPosseString != null}">
+                                                                                                    <label for="cargoDiretor" class="control-label col-lg-2">Cargo Diretor <span class="required">*</span></label>
+                                                                                                    <div class="input col-lg-10">
+                                                                                                        <h:outputText value="#{beanFuncionario.cargoFuncionario}" id="cargoDiretor"/>
+                                                                                                    </div>
+                                                
+                                                                                                    <label for="dataPosse" class="control-label col-lg-2">Data de Posse <span class="required">*</span></label>
+                                                                                                    <div class="input col-lg-10">
+                                                                                                        <h:outputText value="#{beanFuncionario.dataPosseString}" id="dataPosse"/>
+                                                                                                    </div>
+                                                                                                </h:panelGroup>
+                                                
+                                                                                                <label for="email" class="control-label col-lg-2">Email <span class="required">*</span></label>
+                                                                                                <div class="input col-lg-10">
+                                                                                                    <h:outputText value="#{beanFuncionario.funcionario.email}" id="email"/>
+                                                                                                </div>
+                                                
+                                                                                                <label for="cpf" class="control-label col-lg-2">CPF <span class="required">*</span></label>
+                                                                                                <div class="input col-lg-10">
+                                                                                                    <h:outputText value="#{beanFuncionario.funcionario.cpf}" id="cpf"/>
+                                                                                                </div>
+                                                
+                                                                                                <label for="rg" class="control-label col-lg-2">RG<span class="required">*</span></label>
+                                                                                                <div class="input col-lg-10">
+                                                                                                    <h:outputText value="#{beanFuncionario.funcionario.rg}" id="rg"/>
+                                                                                                </div>
+                                                
+                                                                                                <label for="matricula" class="control-label col-lg-2">Matrícula<span class="required">*</span></label>
+                                                                                                <div class=" input col-lg-10">
+                                                                                                    <h:outputText value="#{beanFuncionario.funcionario.matricula}" id="matricula"/>
+                                                                                                </div>
+                                                
+                                                                                                <label for="instituicao" class="control-label col-lg-2">Instituição<span class="required">*</span></label>
+                                                                                                <div class="input col-lg-10">
+                                                                                                    <h:outputText value="#{beanFuncionario.funcionario.instituicao}" id="instituicao"/>
+                                                                                                </div>
+                                                
+                                                                                                <label for="curso" class="control-label col-lg-2">Curso<span class="required">*</span></label>
+                                                                                                <div class="input col-lg-10">
+                                                                                                    <h:outputText value="#{beanFuncionario.funcionario.curso}" id="curso"/>
+                                                                                                </div>
+                                                
+                                                                                                <label for="telefone" class="control-label col-lg-2">Telefone<span class="required">*</span></label>
+                                                                                                <div class="input col-lg-10">
+                                                                                                    <h:outputText value="#{beanFuncionario.funcionario.telefone}" id="telefone"/>
+                                                                                                </div>
+                                                
+                                                                                                <label for="estado" class="control-label col-lg-2">Estado<span class="required">*</span></label>
+                                                                                                <div class="input col-lg-10">
+                                                                                                    <h:outputText value="#{beanFuncionario.funcionario.endereco.estado}" id="estado"/>
+                                                                                                </div>
+                                                
+                                                                                                <label for="cidade" class="control-label col-lg-2">Cidade<span class="required">*</span></label>
+                                                                                                <div class="input col-lg-10">
+                                                                                                    <h:outputText value="#{beanFuncionario.funcionario.endereco.cidade}" id="cidade"/>
+                                                                                                </div>
+                                                
+                                                                                                <label for="bairro" class="control-label col-lg-2">Bairro<span class="required">*</span></label>
+                                                                                                <div class="input col-lg-10">
+                                                                                                    <h:outputText value="#{beanFuncionario.funcionario.endereco.bairro}" id="bairro"/>
+                                                                                                </div>
+                                                
+                                                                                                <label for="logradouro" class="control-label col-lg-2">Logradouro<span class="required">*</span></label>
+                                                                                                <div class="input col-lg-10">
+                                                                                                    <h:outputText value="#{beanFuncionario.funcionario.endereco.logradouro}" id="logradouro"/>
+                                                                                                </div>
+                                                
+                                                                                                <label for="rua" class="control-label col-lg-2">Rua<span class="required">*</span></label>
+                                                                                                <div class="input col-lg-10">
+                                                                                                    <h:outputText value="#{beanFuncionario.funcionario.endereco.rua}" id="rua"/>
+                                                                                                </div>
+                                                
+                                                                                                <label for="numero" class="control-label col-lg-2">Número<span class="required">*</span></label>
+                                                                                                <div class="input col-lg-10">
+                                                                                                    <h:outputText value="#{beanFuncionario.funcionario.endereco.numero}" id="numero"/>
+                                                                                                </div>
+                                                
+                                                                                                <label for="complemento" class="control-label col-lg-2">Complemento<span class="required">*</span></label>
+                                                                                                <div class="input col-lg-10">
+                                                                                                    <h:outputText value="#{beanFuncionario.funcionario.endereco.complemento}" id="complemento"/>
+                                                                                                </div>
+                                                
+                                                                                                <label for="est" class="control-label col-lg-2">Estágio Obrigatório?</label>
+                                                                                                <div class="input col-lg-10">
+                                                                                                    <h:graphicImage name="assets/img/ok.png" rendered="#{beanFuncionario.funcionario.estagioObrigatorio}"/>
+                                                                                                    <h:graphicImage name="assets/img/delete_256.png" rendered="#{!beanFuncionario.funcionario.estagioObrigatorio}"/>
+                                                
+                                                                                                </div>
+                                                
+                                                                                                <label for="codigoAcesso" class="control-label col-lg-2">Cód de Acesso<span class="required">*</span></label>
+                                                                                                <div class="input col-lg-10">
+                                                                                                    <h:outputText value="#{beanFuncionario.funcionario.codigoAcesso}" id="codigoAcesso"/>
+                                                                                                </div>-->
+
+
+
+                                                <div class="form-group ">
+
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-lg-offset-2 col-lg-10">                                                        
+                                                        <h:link styleClass="btn btn-default" outcome="lista" style="margin-left: 10px"> Voltar</h:link>
+                                                    </div>
+                                                </div>
+                                            </h:form>
+                                        </div>
+
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+
+                    </section>
+                </section>
+
+                <!--main content end-->
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16/08/2016 10:34:26 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="ideiah.sisponto02.modelo.Ponto" table="ponto" optimistic-lock="version">
+        <id name="idponto" type="java.lang.Integer">
+            <column name="idPonto" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="funcionario" class="ideiah.sisponto02.modelo.Funcionario" fetch="select">
+            <column name="Funcionario_idfuncionario" not-null="true" />
+        </many-to-one>
+        <property name="data" type="date">
+            <column name="data" length="10" not-null="true" />
+        </property>
+        <property name="entrada" type="time">
+            <column name="entrada" length="8" not-null="true" />
+        </property>
+        <property name="saida" type="time">
+            <column name="saida" length="8" />
+        </property>
+        <property name="atividadeRealizada" type="string">
+            <column name="atividade_realizada" length="250" />
+        </property>
+        <property name="status" type="boolean">
+            <column name="status" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

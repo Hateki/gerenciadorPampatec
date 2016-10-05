@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16/08/2016 10:34:26 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="ideiah.sisponto02.modelo.Diretor" table="diretor" optimistic-lock="version">
+        <id name="iddiretor" type="java.lang.Integer">
+            <column name="idDiretor" />
+            <generator class="identity" />
+        </id>
+        <property name="cargo" type="string">
+            <column name="cargo" length="30" not-null="true" />
+        </property>
+        <property name="dataPosse" type="date">
+            <column name="`data-posse`" length="10" not-null="true" />
+        </property>
+        <property name="senha" type="string">
+            <column name="senha" length="20" not-null="true" />
+        </property>
+        <set name="funcionarios" table="funcionario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Diretor_idDiretor" />
+            </key>
+            <one-to-many class="ideiah.sisponto02.modelo.Funcionario" />
+        </set>
+    </class>
+</hibernate-mapping>

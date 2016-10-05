@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="/WEB-INF/Template.xhtml">
+            <ui:param name="onLoadJs" value="abriModalMensagemSucesso()"/>
+            <ui:define name="title">
+                SisPonto - Listagem de Funcionários
+            </ui:define>
+
+            <ui:define name="conteudo">
+                <!--main content start-->
+                <h:form id="formListaFuncionarios">
+                    <section id="main-content">
+                        <section class="wrapper">            
+                            <!--overview start-->
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <h3 class="page-header"><i class="fa fa-book"></i> Funcionários</h3>
+                                    <ol class="breadcrumb">
+                                        <li><i class="fa fa-home"></i><h:link outcome="/index.xhtml">Página Inicial</h:link></li>
+                                        <li><i class="fa fa-book"></i><i>Funcionários</i></li>
+                                    </ol>
+                                </div>
+                            </div>
+
+                            <div class="alert alert-info alert-dismissable">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <p>Abaixo temos uma tabela com todos os funcionários já cadastrados. Nesta tela é possível realizar novos cadastros, assim como visualizar, editar e excluir registros já salvos!
+
+                                </p>
+                            </div>
+
+                            <h:link styleClass="btn btn-primary btn-lg" outcome="#{beanFuncionario.dirCadastrar()}" style="float: right"><span class="fa fa-plus"></span> Cadastrar Novo</h:link>
+                            <br/>
+                            <br/>
+                            <br/>
+
+                            <div class="row ">
+                                <div class="col-lg-12 well centered center">
+                                    <section class="panel">
+                                        <h:dataTable id="funcionarios" class="table table-striped cell-border table-advance table-hover" cellspacing="0" width="100%" value="#{beanFuncionario.funcionarios}" var="funcionario" >
+
+                                            <h:column  >
+                                                <!-- column header -->
+                                                <f:facet name="header"><i class="fa fa-asterisk"></i> Nome</f:facet>
+                                                <!-- row record -->
+                                                <h:outputText value="#{funcionario.nome}"/>
+                                            </h:column>
+
+                                            <h:column>
+                                                <!-- column header -->
+                                                <f:facet name="header"><i class="fa fa-book"></i> Email</f:facet>
+                                                <!-- row record -->
+                                                <h:outputText value="#{funcionario.email}"/>
+                                            </h:column>
+
+                                            <h:column>
+                                                <!-- column header -->
+                                                <f:facet name="header"><i class="fa fa-clock-o"></i> Telefone</f:facet>
+                                                <!-- row record -->
+                                                <h:outputText value="#{funcionario.telefone}"/>
+                                            </h:column>
+
+                                            <h:column>
+                                                <!-- column header -->
+                                                <f:facet name="header"><i class="fa fa-level-up"></i> Ativo?</f:facet>
+                                                <!-- row record -->
+                                                <h:graphicImage name="assets/img/ok.png" rendered="#{funcionario.ativo}"/>
+                                                <h:graphicImage name="assets/img/delete_256.png" rendered="#{!funcionario.ativo}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <!-- column header -->
+                                                <f:facet name="header"><i class="fa fa-level-up"></i> Adminstrador?</f:facet>
+                                                <!-- row record -->
+                                                <h:graphicImage name="assets/img/ok.png" rendered="#{funcionario.diretor!=null}"/>
+                                                <h:graphicImage name="assets/img/delete_256.png" rendered="#{funcionario.diretor==null}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <!-- column header -->
+                                                <f:facet name="header"><i class="fa fa-cogs"></i> Ações</f:facet>
+                                                <!-- row record -->
+                                                <div class="btn-group">
+                                                    <h:commandLink title="Consultar" styleClass="btn btn-primary" action="#{beanFuncionario.dirConsultar(funcionario)}">
+                                                        <span class="fa fa-search"></span>
+                                                    </h:commandLink>
+                                                    <h:commandLink title="Editar" styleClass="btn btn-success" action="#{beanFuncionario.dirEditar(funcionario)}"   >
+                                                        <span class="fa fa-pencil"></span>
+                                                    </h:commandLink>
+                                                    <h:commandLink id="excluirFuncionario" title="Excluir" styleClass="btn btn-danger" onclick="return confirmaExclusao()" action="#{beanFuncionario.excluirFuncionario(funcionario)}"   >
+                                                        <span class="fa fa-trash-o"></span>
+                                                    </h:commandLink>
+                                                </div>
+                                            </h:column>
+                                        </h:dataTable>
+                                    </section>
+                                </div>
+                            </div>
+                        </section>
+                        <!-- Modal de feedBack -->
+                        <ui:repeat value="#{facesContext.getMessageList('formListaFuncionarios:excluirFuncionario')}" var="mensagem">
+                            <h:panelGroup rendered="#{mensagem.detail == 'Erro'}">
+                                <ui:include src="../feedbacks/MensagemErro.xhtml">
+                                    <ui:param name="mensagemPrincipal" value="O funcionário já tem pontos cadastrados."/>
+                                    <ui:param name="titulo" value="Não se pode excluir!"/>
+                                </ui:include>
+                            </h:panelGroup>
+
+                            <h:panelGroup rendered="#{mensagem.detail == 'Sucesso'}">
+                                <ui:include src="../feedbacks/MensagemSucesso.xhtml">
+                                    <ui:param name="mensagemPrincipal" value="O funcionário foi excluido com sucesso."/>
+                                    <ui:param name="titulo" value="Funcionário excluido!"/>
+                                </ui:include>
+                            </h:panelGroup>
+
+                            <h:panelGroup rendered="#{mensagem.detail == 'ErroInesperado'}">
+                                <ui:include src="../feedbacks/MensagemErro.xhtml">
+                                    <ui:param name="mensagemPrincipal" value="Ocorreu um erro inesperado, tente novamente mais tarde."/>
+                                    <ui:param name="titulo" value="Não se pode excluir!"/>
+                                </ui:include>
+                            </h:panelGroup>
+                        </ui:repeat>
+                    </section>
+                </h:form>
+                <!--main content end-->
+            </ui:define>
+
+        </ui:composition>
+
+        <script>
+            $(document).ready(function () {
+                $('#funcionarios').DataTable();
+            });
+
+        </script>
+    </body>
+</html>

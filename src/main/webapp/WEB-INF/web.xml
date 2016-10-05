@@ -2,62 +2,8 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <context-param>
         <param-name>javax.faces.PROJECT_STAGE</param-name>
-        <!--SE NÃO QUISER QUE APAREÇA AS MENSAGENS DE PROBLEMAS PARA O USUÁRIO MUDE O VALOR PARA Production-->
-        <!--<param-value>Development</param-value>-->
         <param-value>Production</param-value>
     </context-param>
-    <context-param>
-        <param-name>primefaces.FONT_AWESOME</param-name>
-        <param-value>true</param-value>
-    </context-param>
-    <filter>
-        <filter-name>RecuperarSenhaFilter</filter-name>
-        <filter-class>com.ideiah.gerenciadorpampatec.controller.RecuperarSenhaFilter</filter-class>
-    </filter>
-    <filter>
-        <filter-name>LoginFilter</filter-name>
-        <filter-class>com.ideiah.gerenciadorpampatec.controller.LoginFilter</filter-class>
-    </filter>
-    <filter>
-        <filter-name>LoginFilterGerente</filter-name>
-        <filter-class>com.ideiah.gerenciadorpampatec.controller.LoginFilterGerente</filter-class>
-    </filter>
-    <filter>
-        <filter-name>EnviarProjetoFilter</filter-name>
-        <filter-class>com.ideiah.gerenciadorpampatec.controller.EnviarProjetoFilter</filter-class>
-    </filter>
-    <filter>
-        <filter-name>PreAvaliarPlanoFiltro</filter-name>
-        <filter-class>com.ideiah.gerenciadorpampatec.controller.PreAvaliarPlanoFiltro</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>LoginFilter</filter-name>
-        <url-pattern>/view/empreendedor/*</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>EnviarProjetoFilter</filter-name>
-        <url-pattern>/view/empreendedor/enviarProjeto.jsf</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>LoginFilterGerente</filter-name>
-        <url-pattern>/view/gerentederelacionamento/*</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>CompletarCadastroFilter</filter-name>
-        <url-pattern>/terminarCadastroEmpreendedor.jsf</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>VerificarEmailFilter</filter-name>
-        <url-pattern>/verificarEmail.jsf</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>RecuperarSenhaFilter</filter-name>
-        <url-pattern>/recuperarSenha.jsf</url-pattern>
-    </filter-mapping>
-    <listener>
-        <description>HttpSessionListener</description>
-        <listener-class>com.ideiah.gerenciadorpampatec.controller.SessionListener</listener-class>
-    </listener>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -65,49 +11,14 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>*.jsf</url-pattern>
+        <url-pattern>/faces/*</url-pattern>
     </servlet-mapping>
-    <filter-mapping>
-        <filter-name>PreAvaliarPlanoFiltro</filter-name>
-        <url-pattern>/view/gerentederelacionamento/preAvaliarPlanoDeNegocio.jsf</url-pattern>
-    </filter-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>loginEmpreendedor.jsf</welcome-file>
+        <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
-    <filter>
-        <filter-name>CompletarCadastroFilter</filter-name>
-        <filter-class>com.ideiah.gerenciadorpampatec.controller.CompletarCadastroFilter</filter-class>
-    </filter>
-    <filter>
-        <filter-name>VerificarEmailFilter</filter-name>
-        <filter-class>com.ideiah.gerenciadorpampatec.controller.VerificarEmailFilter</filter-class>
-    </filter>
-    
-    <!--
-    Mapeamento para tratar as exceções geradas quandoa Sessão é finalizada.
-
-    <error-page>
-        <exception-type>javax.faces.application.ViewExpiredException</exception-type>
-        <location>/WEB-INF/errorpages/expired.jsf</location>
-    </error-page>
-    
-    <error-page>
-        <exception-type>com.sun.faces.mgbean.ManagedBeanCreationException</exception-type>
-        <location>/WEB-INF/errorpages/expired.jsf</location>
-    </error-page>
-    -->
-    <error-page>
-        <error-code>404</error-code>
-        <location>/WEB-INF/errorpages/404.jsf</location>
-    </error-page>
-    
-    <error-page>
-        <error-code>500</error-code>
-        <location>/WEB-INF/errorpages/500.jsf</location>
-    </error-page>
 </web-app>

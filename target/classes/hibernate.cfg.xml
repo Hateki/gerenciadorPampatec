@@ -4,24 +4,12 @@
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/gerenciadorpampatec</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/sistemapontoweb</property>
     <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password">root </property>
-    <property name="hibernate.current_session_context_class">thread</property>
-    <property name="hibernate.hbm2ddl.auto">update</property>
-    <mapping resource="com/ideiah/gerenciadorpampatec/model/Planofinanceiro.hbm.xml"/>
-    <mapping resource="com/ideiah/gerenciadorpampatec/model/Projeto.hbm.xml"/>
-    <mapping resource="com/ideiah/gerenciadorpampatec/model/Usuario.hbm.xml"/>
-    <mapping resource="com/ideiah/gerenciadorpampatec/model/Negocio.hbm.xml"/>
-    <mapping resource="com/ideiah/gerenciadorpampatec/model/AnaliseEmprego.hbm.xml"/>
-    <mapping resource="com/ideiah/gerenciadorpampatec/model/Produtoouservico.hbm.xml"/>
-    <mapping resource="com/ideiah/gerenciadorpampatec/model/EmpreendedorEmail.hbm.xml"/>
-    <mapping resource="com/ideiah/gerenciadorpampatec/model/Notificacao.hbm.xml"/>
-    <mapping resource="com/ideiah/gerenciadorpampatec/model/GerenteRelacionamentos.xml"/>
-    <mapping resource="com/ideiah/gerenciadorpampatec/model/ComentarioProjeto.hbm.xml"/>
-    <mapping resource="com/ideiah/gerenciadorpampatec/model/Custo.hbm.xml"/>
-    <mapping resource="com/ideiah/gerenciadorpampatec/model/Textocomentario.hbm.xml"/>
-    <mapping resource="com/ideiah/gerenciadorpampatec/model/EmailSystemConfig.hbm.xml"/>
-    <mapping resource="com/ideiah/gerenciadorpampatec/model/AlteracaoCampos.hbm.xml"/>
+    <property name="hibernate.connection.password">root</property>
+    <mapping resource="ideiah/sisponto02/modelo/Funcionario.hbm.xml"/>
+    <mapping resource="ideiah/sisponto02/modelo/Diretor.hbm.xml"/>
+    <mapping resource="ideiah/sisponto02/modelo/Endereco.hbm.xml"/>
+    <mapping resource="ideiah/sisponto02/modelo/Ponto.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
