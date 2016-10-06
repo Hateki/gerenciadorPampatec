@@ -34,7 +34,10 @@ public class Inscricao extends HttpServlet {
         String id = request.getParameter("id");
         if(id != null && id.equalsIgnoreCase("1")){
             request.getRequestDispatcher("newjsf.xhtml").forward(request, response);
-        }else{
+        }else if(id != null && id.equalsIgnoreCase("999")){
+            request.getRequestDispatcher("newjsf3.xhtml").forward(request, response);
+        }
+else{
             request.getRequestDispatcher("newjsf2.xhtml").forward(request, response);
         }
     }
